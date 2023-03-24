@@ -1,3 +1,8 @@
+<!-- 
+Context: 
+"post": post
+"comment_form": comment_form
+-->
 {% extends "base.html" %}
 {% load blog_extras %}
 
@@ -13,6 +18,8 @@
         {{ post.content|safe }}
     {% endcol %}
 {% endrow %}
+
+{% include "blog/post-comments.html" %}
 
 {% row %}
     {% col %}

@@ -1,2 +1,8 @@
+<!--
+  include by: post-detail.html
+  Context :
+  "post": post
+  "comment_form": comment_form
+-->
 {% load blog_extras %}
 <small>By {{ post.author|author_details:request.user }} on {{ post.published_at|date:"M, d Y" }}</small>
