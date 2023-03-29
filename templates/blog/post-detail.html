@@ -4,7 +4,8 @@ Context:
 "comment_form": comment_form
 -->
 {% extends "base.html" %}
-{% load blog_extras %}
+{% load blog_extras cache %}
+
 
 {% block content %}
 <h2>{{ post.title }}</h2>
@@ -23,7 +24,9 @@ Context:
 
 {% row %}
     {% col %}
-        {% recent_posts post %}
+      {% cache 3600 recent_posts post %}
+          {% recent_posts post %}
+      {% endcache %}
     {% endcol %}
 {% endrow %}
 
