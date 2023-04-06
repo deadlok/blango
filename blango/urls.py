@@ -14,11 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 from django.conf import settings
 import debug_toolbar
+import blango_auth.views
 
 import blog.views
+
+from django_registration.backends.activation.views import RegistrationView
+from blango_auth.forms import BlangoRegistrationForm
 
 
 urlpatterns = [
@@ -26,6 +30,10 @@ urlpatterns = [
     path("post/<slug>", blog.views.post_detail, name='blog-post-detail'),
     path("", blog.views.index),
     path("ip/", blog.views.get_ip),
+    path("accounts/profile/", blango_auth.views.profile, name="profile"),
+    path("accounts/register/", RegistrationView.as_view(form_class=BlangoRegistrationForm), name="django_registration_register",),
+    path("accounts/", include("django_registration.backends.activation.urls")),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:
