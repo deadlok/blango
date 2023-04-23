@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-class AuthorModifyOrReadonly(permissions.IsAuthenticatedOrReadOnly):
+class AuthorModifyOrReadOnly(permissions.IsAuthenticatedOrReadOnly):
   
   def has_object_permission(self, request, views, obj):
     if request.method in permissions.SAFE_METHODS:
