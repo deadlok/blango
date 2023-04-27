@@ -80,4 +80,4 @@ class PostViewSet(viewsets.ModelViewSet):
     
     @method_decorator(cache_page(120))
     def list(self, *args, **kwargs):
-        return super(PostViewSet, self).list(*arg, **kwargs)
+        return super(PostViewSet, self).list(*args, **kwargs)
