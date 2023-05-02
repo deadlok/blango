@@ -1,11 +1,11 @@
 from django.test import LiveServerTestCase
 from requests.auth import HTTPBasicAuth
-from rest_framework.test import RequestClient
+from rest_framework.test import RequestsClient
 
 from django.contrib.auth import get_user_model
 from blog.models import Tag
 
-class TagApitestCase(LiveServerTestCaase):
+class TagApitestCase(LiveServerTestCase):
   def setrup(self):
     get_user_model().objects.create_user(
       email="testuser@example.com", password="password"
@@ -20,7 +20,7 @@ class TagApitestCase(LiveServerTestCaase):
     def test_tag_list(self):
       resp = self.client.get(self.live_server_url + "/api/v1/tags/")
       self.assertEqual(resp.status_code,200)
-      data = resp.json()
+      data = resp.json()["results"]
       self.assertEqual(len(data),4)
       self.assertEqual(self.tag_values, {t["value"] for t in data})
 
