@@ -10,6 +10,9 @@ import os
 from blog.api.views import UserDetail, TagViewSet, PostViewSet
 from rest_framework.authtoken import views
 
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+
 schema_view = get_schema_view(
     openapi.Info(
         title="Blango API",
@@ -53,6 +56,9 @@ urlpatterns += [
         PostViewSet.as_view({"get": "list"}),
         name="posts-by-time",
     ),
+
+    path("jwt/", TokenObtainPairView.as_view(), name="jwt_obtain_pair"),
+    path("jwt/refresh/", TokenRefreshView.as_view(), name="jwt_refresh"),
 ]
 
 
